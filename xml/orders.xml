@@ -5,7 +5,7 @@
         <user_id>2</user_id>
         <timestamp>2025-07-15 09:09:25</timestamp>
         <payment_method>GCash</payment_method>
-        <payment_proof>/labjewels/assets/image/payment_proof/proof_6875fea5b7cd4.png</payment_proof>
+        <payment_proof>../assets/image/payment_proof/proof_6875fea5b7cd4.png</payment_proof>
         <status>pending</status>
         <shipping_fee>32.45</shipping_fee>
 
@@ -13,7 +13,7 @@
             <item>
                 <product_id>4009</product_id>
                 <product_name>Heart Locket Necklace</product_name>
-                <image>/labjewels/assets/image/products/686bfd4f93128_oscar-ramirez-Ppz2c-X0GKE-unsplash.jpg</image>
+                <image>../assets/image/products/686bfd4f93128_oscar-ramirez-Ppz2c-X0GKE-unsplash.jpg</image>
                 <price>649</price>
                 <color>Silver</color>
                 <size>16in</size>
@@ -26,7 +26,7 @@
         <user_id>2</user_id>
         <timestamp>2025-07-15 09:59:48</timestamp>
         <payment_method>GCash</payment_method>
-        <payment_proof>/labjewels/assets/image/payment_proof/proof_68760a742e1c5.png</payment_proof>
+        <payment_proof>../assets/image/payment_proof/proof_68760a742e1c5.png</payment_proof>
         <status>pending</status>
         <shipping_fee>129.80</shipping_fee>
 
@@ -34,7 +34,7 @@
             <item>
                 <product_id>4009</product_id>
                 <product_name>Heart Locket Necklace</product_name>
-                <image>/labjewels/assets/image/products/686bfd4f93128_oscar-ramirez-Ppz2c-X0GKE-unsplash.jpg</image>
+                <image>../assets/image/products/686bfd4f93128_oscar-ramirez-Ppz2c-X0GKE-unsplash.jpg</image>
                 <price>649</price>
                 <color>Silver</color>
                 <size>16in</size>
@@ -56,7 +56,7 @@
             <item>
                 <product_id>4012</product_id>
                 <product_name>Moonstone Necklace</product_name>
-                <image>/labjewels/assets/image/products/686bfd4f93128_oscar-ramirez-Ppz2c-X0GKE-unsplash.jpg</image>
+                <image>../assets/image/products/686bfd4f93128_oscar-ramirez-Ppz2c-X0GKE-unsplash.jpg</image>
                 <price>649</price>
                 <color>Gold</color>
                 <size>18in</size>
@@ -71,14 +71,14 @@
         <user_id>3</user_id>
         <timestamp>2025-07-15 17:07:15</timestamp>
         <payment_method>PayMaya</payment_method>
-        <payment_proof>/labjewels/assets/image/payment_proof/proof_68766ea37eb80.png</payment_proof>
+        <payment_proof>../assets/image/payment_proof/proof_68766ea37eb80.png</payment_proof>
         <status>delivered</status>
         <shipping_fee>39.95</shipping_fee>
         <items>
             <item>
                 <product_id>4005</product_id>
                 <product_name>Pearl Pendant Necklace</product_name>
-                <image>/labjewels/assets/image/products/686bfd368ee31_oscar-ramirez-ARqkqB78iPU-unsplash.jpg</image>
+                <image>../assets/image/products/686bfd368ee31_oscar-ramirez-ARqkqB78iPU-unsplash.jpg</image>
                 <price>799</price>
                 <color>Silver</color>
                 <size>16in</size>
@@ -92,14 +92,14 @@
         <user_id>2</user_id>
         <timestamp>2025-07-16 16:31:30</timestamp>
         <payment_method>PayMaya</payment_method>
-        <payment_proof>/labjewels/assets/image/payment_proof/proof_6877b7c23c590.jpeg</payment_proof>
+        <payment_proof>../assets/image/payment_proof/proof_6877b7c23c590.jpeg</payment_proof>
         <status>shipped</status>
         <shipping_fee>64.90</shipping_fee>
         <items>
             <item>
                 <product_id>4005</product_id>
                 <product_name>Pearl Pendant Necklace</product_name>
-                <image>/labjewels/assets/image/products/686bfd368ee31_oscar-ramirez-ARqkqB78iPU-unsplash.jpg</image>
+                <image>../assets/image/products/686bfd368ee31_oscar-ramirez-ARqkqB78iPU-unsplash.jpg</image>
                 <price>799</price>
                 <color>Gold</color>
                 <size>16in</size>
@@ -108,7 +108,7 @@
             <item>
                 <product_id>4010</product_id>
                 <product_name>Infinity Symbol Necklace</product_name>
-                <image>/labjewels/assets/image/products/686bfe02d7e30_686bfd220bd32_oscar-ramirez-YScm7xyIGjQ-unsplash.jpg</image>
+                <image>../assets/image/products/686bfe02d7e30_686bfd220bd32_oscar-ramirez-YScm7xyIGjQ-unsplash.jpg</image>
                 <price>499</price>
                 <color>Silver</color>
                 <size>16in</size>
