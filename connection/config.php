@@ -28,7 +28,7 @@ function getDBConnection()
         return $pdo;
     } catch (PDOException $e) {
         error_log("Connection failed: " . $e->getMessage());
-        die("Connection failed. Please try again later.");
+        die("Connection failed. Please try again later. $dsn");
     }
 }
 
