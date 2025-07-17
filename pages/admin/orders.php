@@ -11,8 +11,10 @@ if (!$currentUser || $currentUser['user_id'] != 1) {
     exit;
 }
 
-$ordersXmlFile = __DIR__ . '/../../xml/orders.xml';
-$productsXmlFile = __DIR__ . '/../../xml/products.xml';
+// $ordersXmlFile = __DIR__ . '/../../xml/orders.xml';
+$ordersXmlFile = '../../xml/orders.xml';
+// $productsXmlFile = __DIR__ . '/../../xml/products.xml';
+$productsXmlFile = '../../xml/products.xml';
 
 function loadOrdersXML($file)
 {
