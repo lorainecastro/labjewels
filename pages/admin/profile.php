@@ -22,10 +22,10 @@ $csrf_token = $_SESSION['csrf_token'];
 
 // Handle profile update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
-    $username = sanitizeInput($_POST['username']);
-    $firstname = sanitizeInput($_POST['firstname']);
-    $lastname = sanitizeInput($_POST['lastname']);
-    
+    $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
+    $firstname = htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8');
+    $lastname = htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8');
+
     try {
         $pdo = getDBConnection();
         // Check if username is already taken by another user
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                 WHERE user_id = ?
             ");
             $stmt->execute([$username, $firstname, $lastname, $currentUser['user_id']]);
-            
+
             $success = 'Profile updated successfully';
             $currentUser = validateSession(); // Refresh user data
         }
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_picture'])) {
         $file = $_FILES['profile_image'];
         $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
         $maxSize = 5 * 1024 * 1024; // 5MB
-        
+
         if (!in_array($file['type'], $allowedTypes)) {
             $error = 'Invalid file type. Please upload JPEG, PNG, or GIF.';
         } elseif ($file['size'] > $maxSize) {
@@ -66,11 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_picture'])) {
             $filename = 'profile_' . $currentUser['user_id'] . '_' . time() . '.' . $ext;
             $uploadDir = '../../assets/image/profile/';
             $uploadPath = $uploadDir . $filename;
-            
+
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
             }
-            
+
             if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
                 try {
                     $pdo = getDBConnection();
@@ -94,10 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_picture'])) {
 
 // Handle password change
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
-    $current_password = $_POST['current_password'];
-    $new_password = sanitizeInput($_POST['new_password']);
-    $confirm_password = $_POST['confirm_password'];
-    
+    $current_password = $_POST['current_password']; // Validate later
+    $new_password = $_POST['new_password']; // Validate later
+    $confirm_password = $_POST['confirm_password']; // Validate later
+
     if ($new_password !== $confirm_password) {
         $error = 'New passwords do not match';
     } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', $new_password)) {
@@ -121,6 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -228,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             color: var(--whitefont-color);
             padding: 8px;
             font-size: 12px;
@@ -237,7 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
         }
 
         .profile-image-overlay:hover {
-            background: rgba(0,0,0,0.9);
+            background: rgba(0, 0, 0, 0.9);
         }
 
         .profile-info {
@@ -450,16 +451,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
             .profile-container {
                 padding: 15px;
             }
+
             .profile-header-content {
                 flex-direction: column;
                 text-align: center;
             }
+
             .form-row {
                 flex-direction: column;
             }
+
             .tab-navigation {
                 flex-wrap: wrap;
             }
+
             .tab-button {
                 flex: 1;
                 min-width: 120px;
@@ -488,6 +493,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
         }
     </style>
 </head>
+
 <body>
     <div class="profile-container">
         <h1>Profile</h1>
@@ -516,7 +522,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                 <?php echo htmlspecialchars($success); ?>
             </div>
         <?php endif; ?>
-        
+
         <?php if ($error): ?>
             <div class="alert alert-error">
                 <i class="fas fa-exclamation-circle"></i>
@@ -542,7 +548,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                     <form method="POST" action="">
                         <div class="form-section">
                             <h3 class="section-title">Basic Information</h3>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="firstname">First Name *</label>
@@ -553,7 +559,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                                     <input type="text" id="lastname" name="lastname" value="<?php echo htmlspecialchars($currentUser['lastname']); ?>" required>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="username">Username *</label>
@@ -561,7 +567,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <button type="submit" name="update_profile" class="btn btn-primary">
                             <i class="fas fa-save"></i> Update Profile
                         </button>
@@ -571,7 +577,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                 <div class="tab-pane" id="picture">
                     <div class="form-section">
                         <h3 class="section-title">Profile Picture</h3>
-                        
+
                         <div style="display: flex; gap: 30px; align-items: flex-start;">
                             <div style="text-align: center;">
                                 <div class="profile-image-container" style="margin-bottom: 15px;">
@@ -579,7 +585,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                                 </div>
                                 <p style="font-size: 14px; color: var(--grayfont-color);">Current Picture</p>
                             </div>
-                            
+
                             <div style="flex: 1;">
                                 <form method="POST" enctype="multipart/form-data">
                                     <div class="file-upload-area" id="fileUploadArea">
@@ -590,14 +596,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                                         <div class="upload-subtext">PNG, JPG, GIF up to 5MB</div>
                                         <input type="file" id="profileImageInput" name="profile_image" accept="image/*" class="hidden">
                                     </div>
-                                    
+
                                     <div style="margin-top: 20px;">
                                         <button type="submit" name="upload_picture" class="btn btn-primary">
                                             <i class="fas fa-upload"></i> Upload New Picture
                                         </button>
                                     </div>
                                 </form>
-                                
+
                                 <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 4px;">
                                     <h4 style="margin-bottom: 10px; font-size: 14px; color: #856404;">Image Requirements:</h4>
                                     <ul style="font-size: 13px; color: #856404; margin-left: 20px;">
@@ -616,12 +622,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                     <form method="POST" action="">
                         <div class="form-section">
                             <h3 class="section-title">Change Password</h3>
-                            
+
                             <div class="form-group">
                                 <label for="current_password">Current Password *</label>
                                 <input type="password" id="current_password" name="current_password" required>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="new_password">New Password *</label>
@@ -633,7 +639,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                                     <input type="password" id="confirm_password" name="confirm_password" required minlength="8">
                                 </div>
                             </div>
-                            
+
                             <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px;">
                                 <h4 style="margin-bottom: 10px; font-size: 14px; color: #856404;"><i class="fas fa-exclamation-triangle"></i> Password Requirements:</h4>
                                 <ul style="font-size: 13px; color: #856404; margin-left: 20px;">
@@ -644,7 +650,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
                                 </ul>
                             </div>
                         </div>
-                        
+
                         <button type="submit" name="change_password" class="btn btn-primary">
                             <i class="fas fa-key"></i> Change Password
                         </button>
@@ -659,7 +665,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
             // Tab handling
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabPanes = document.querySelectorAll('.tab-pane');
-            
+
             tabButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const targetTab = button.getAttribute('data-tab');
@@ -750,4 +756,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
         });
     </script>
 </body>
+
 </html>
