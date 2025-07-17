@@ -12,19 +12,19 @@ if (!$currentUser || $currentUser['user_id'] != 1) {
 }
 
 // $ordersXmlFile = __DIR__ . '/../../xml/orders.xml';
-$ordersXmlFile = '/../../xml/orders.xml';
+$ordersXmlFile = '../../xml/orders.xml';
 
 function loadOrdersXML($file)
 {
-    if (!file_exists($file)) {
-        $ordersXmlFile = 'xml/orders.xml';
-        die('XML file does not exist.' . $ordersXmlFile);
-    }
-    $xml = simplexml_load_file($file);
-    if ($xml === false) {
-        die('Error loading orders XML file.');
-    }
-    return $xml;
+  if (!file_exists($file)) {
+    $ordersXmlFile = 'xml/orders.xml';
+    die('XML file does not exist.' . $ordersXmlFile);
+  }
+  $xml = simplexml_load_file($file);
+  if ($xml === false) {
+    die('Error loading XML file.');
+  }
+  return $xml;
 }
 
 // Load orders from XML
