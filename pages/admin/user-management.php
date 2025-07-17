@@ -793,7 +793,7 @@ try {
                             echo "<td>" . htmlspecialchars($user['email']) . "</td>";
                             echo "<td>" . htmlspecialchars($user['username']) . "</td>";
                             // echo "<td><img src='../../assets/image/profile/" . htmlspecialchars($user['icon']) . "' alt='User Icon' style='width: 45px; height: 45px; border-radius: 50%; object-fit: cover;'></td>";
-                            echo "<td><img src='../../assets/image/profile/" . htmlspecialchars($user['icon'] ?: 'no-icon.png') . "' alt='User Icon' style='width: 45px; height: 45px; border-radius: 50%; object-fit: cover;' onerror=\"this.src='../assets/image/profile/no-icon.png';\"></td>";
+                            echo "<td><img src='../../assets/image/profile/" . htmlspecialchars($user['icon'] ?: 'no-icon.png') . "' alt='User Icon' style='width: 45px; height: 45px; border-radius: 50%; object-fit: cover;' onerror=\"this.src='../../assets/image/profile/no-icon.png';\"></td>";
                             echo "<td>$status</td>";
                             echo "<td class='action-cell'>";
                             echo "<button class='btn btn-primary' onclick=\"openViewModal({$user['user_id']})\"><i class='fas fa-eye'></i> View</button>";
