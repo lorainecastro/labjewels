@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Jun 24, 2025 at 06:20 AM
+-- Generation Time: Jul 17, 2025 at 01:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -54,9 +54,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `username`, `password`, `address`, `phone`, `icon`, `isActive`, `isVerified`, `isDeleted`, `otp_code`, `otp_purpose`, `otp_created_at`, `otp_expires_at`, `otp_is_used`, `created_at`, `updated_at`) VALUES
-(1, 'Loraine', 'Castro', 'castro.loraine.26@gmail.com', 'admin', '$2y$10$x4K9zpfuXWr19eePB38LGeqSikdPVXpS4A2gb8kmsiYHHpWHR1Q.m', 'Bulacan', '09123456789', 'no-icon.png', 1, 1, 0, '014505', 'PASSWORD_RESET', '2025-06-23 02:31:14', '2025-06-22 20:46:14', 0, '2025-06-22 13:48:08', '2025-06-24 04:15:29'),
-(2, 'Loraine', 'Castro', 'email1@example.com', 'user1', '$2y$10$QY/yT42LIiYrlqN6xCIAfemmFQBoa6X.4EKc082LRCxU5QH65xRZq', 'Bulacan', '09123456789', 'profilePhoto1.jpg', 1, 1, 0, NULL, 'EMAIL_VERIFICATION', '2025-06-24 04:04:55', NULL, 1, '2025-06-24 04:04:55', '2025-06-24 04:18:08'),
-(3, 'Loraine', 'Castro', 'email2@example.com', 'user2', '$2y$10$Pfn55NvVDAMZ2UgR0b136.xssGX9h3Ce/CrvPEgoDmE8sIBwvpgSq', 'Bulacan', '09123456789', 'profilePhoto2.jpg', 1, 1, 0, NULL, 'EMAIL_VERIFICATION', '2025-06-24 04:08:45', NULL, 1, '2025-06-24 04:08:45', '2025-06-24 04:18:45');
+(1, 'Loraine', 'Castro', 'admin@gmail.com', 'admin', '$2y$10$x4K9zpfuXWr19eePB38LGeqSikdPVXpS4A2gb8kmsiYHHpWHR1Q.m', 'Bulacan', '09123456789', 'profile_1_1752665004.jpeg', 1, 1, 0, '014505', 'PASSWORD_RESET', '2025-06-23 02:31:14', '2025-06-22 20:46:14', 0, '2025-06-22 13:48:08', '2025-07-17 04:58:49'),
+(2, 'Loraine', 'Castro', 'email1@example.com', 'user1', '$2y$10$QY/yT42LIiYrlqN6xCIAfemmFQBoa6X.4EKc082LRCxU5QH65xRZq', 'Bulacan', '09123456789', 'profilePhoto1.jpg', 1, 1, 0, NULL, 'EMAIL_VERIFICATION', '2025-06-24 04:04:55', NULL, 1, '2025-06-24 04:04:55', '2025-07-17 04:50:48'),
+(3, 'Elci', 'Castro', 'email2@example.com', 'user2', '$2y$10$Pfn55NvVDAMZ2UgR0b136.xssGX9h3Ce/CrvPEgoDmE8sIBwvpgSq', 'Bulacan', '09123456789', 'profilePhoto2.jpg', 1, 1, 0, NULL, 'EMAIL_VERIFICATION', '2025-06-24 04:08:45', NULL, 1, '2025-06-24 04:08:45', '2025-07-16 16:20:58'),
+(4, 'Raine', 'Castro', 'email3@gmail.com', 'user3', '$2y$10$iz/dIxwjmHe5iB/WVpCohu9KZWH3SvUY4j/u8L4HCzch7o19RKtnK', 'Bulacan', '09123456789', 'profile_4_1752682686.jpg', 1, 1, 0, NULL, 'EMAIL_VERIFICATION', '2025-07-16 16:10:20', NULL, 1, '2025-07-16 16:10:20', '2025-07-16 16:21:08');
 
 -- --------------------------------------------------------
 
@@ -101,13 +102,13 @@ ALTER TABLE `user_sessions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=397;
 
 --
 -- Constraints for dumped tables
