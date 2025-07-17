@@ -909,7 +909,7 @@ try {
         function openViewModal(id) {
             const user = users.find(u => u.user_id == id);
             if (user) {
-                document.getElementById('viewIcon').src = '../../assets/image/profile/' + (user.icon || 'default-icon.png');
+                document.getElementById('viewIcon').src = '../../assets/image/profile/' + (user.icon || 'no-icon.png');
                 document.getElementById('viewFullName').value = user.full_name || '';
                 document.getElementById('viewEmail').value = user.email || '';
                 document.getElementById('viewUsername').value = user.username || '';
