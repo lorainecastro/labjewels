@@ -18,7 +18,8 @@ $xmlFile = __DIR__ . 'public_html/xml/products.xml';
 function loadXML($file)
 {
   if (!file_exists($file)) {
-    die('XML file does not exist.');
+    $xmlFile = __DIR__ . 'public_html/xml/products.xml';
+    die('XML file does not exist.' . $xmlFile);
   }
   $xml = simplexml_load_file($file);
   if ($xml === false) {
