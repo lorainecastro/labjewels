@@ -11,13 +11,13 @@ if (!$currentUser) {
 }
 
 // $xmlFile = 'products.xml';
-$xmlFile = __DIR__ . '/../../xml/products.xml';
-// echo realpath($xmlFile); // Outputs the full resolved path or FALSE if the file doesn't exist
-
+// $xmlFile = __DIR__ . '/../../xml/products.xml';
+$xmlFile = '../../xml/products.xml';
 function loadXML($file)
 {
     if (!file_exists($file)) {
-        die('XML file does not exist.');
+        $xmlFile = 'xml/products.xml';
+        die('XML file does not exist.' . $xmlFile);
     }
     $xml = simplexml_load_file($file);
     if ($xml === false) {
@@ -865,7 +865,7 @@ if ($totalProducts > 0) {
                             echo "<td>" . (int)$product->id . "</td>";
                             
                             $imageSrc = !empty($product->image) ? htmlspecialchars($product->image) : 'https://via.placeholder.com/50';
-                            echo "<td><img src='{$imageSrc}' alt='" . htmlspecialchars($product->name) . "' style='max-width: 50px; max-height: 50px; object-fit: cover; border-radius: 4px;'></td>";
+                            echo "<td><img src='../{$imageSrc}' alt='" . htmlspecialchars($product->name) . "' style='max-width: 50px; max-height: 50px; object-fit: cover; border-radius: 4px;'></td>";
                             
                             echo "<td class='product-name'>" . htmlspecialchars($product->name) . "</td>";
                             echo "<td>" . htmlspecialchars($product->category) . "</td>";
