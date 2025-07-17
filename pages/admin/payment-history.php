@@ -11,13 +11,14 @@ if (!$currentUser || $currentUser['user_id'] != 1) {
     exit;
 }
 
-$ordersXmlFile = __DIR__ . '/../../xml/orders.xml';
+// $ordersXmlFile = __DIR__ . '/../../xml/orders.xml';
+$ordersXmlFile = '../../xml/orders.xml';
 
 function loadOrdersXML($file)
 {
     if (!file_exists($file)) {
-        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><orders></orders>');
-        $xml->asXML($file);
+        $ordersXmlFile = 'xml/orders.xml';
+        die('XML file does not exist.' . $ordersXmlFile);
     }
     $xml = simplexml_load_file($file);
     if ($xml === false) {
@@ -924,23 +925,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         // Orders data from PHP
         const orders = <?php echo json_encode($orders); ?>;
 
-        // function openProofModal(paymentProof) {
-        //     const proofImg = document.getElementById('paymentProofImg');
-        //     const noProofMessage = document.getElementById('noProofMessage');
-        //     proofImg.src = paymentProof || '';
-        //     noProofMessage.style.display = paymentProof ? 'none' : 'block';
-        //     proofModal.classList.add('show');
-        //     document.body.style.overflow = 'hidden';
-        // }
-
         function openProofModal(paymentProof) {
             const proofImg = document.getElementById('paymentProofImg');
             const noProofMessage = document.getElementById('noProofMessage');
-            proofImg.src = paymentProof ? `../../assets/image/payment_proof/${paymentProof}` : '../../assets/image/payment_proof/no-proof.png';
+            proofImg.src = paymentProof || '';
             noProofMessage.style.display = paymentProof ? 'none' : 'block';
             proofModal.classList.add('show');
             document.body.style.overflow = 'hidden';
         }
+
+        // function openProofModal(paymentProof) {
+        //     const proofImg = document.getElementById('paymentProofImg');
+        //     const noProofMessage = document.getElementById('noProofMessage');
+        //     proofImg.src = paymentProof ? `../assets/image/payment_proof/${paymentProof}` : '../assets/image/payment_proof/no-proof.png';
+        //     noProofMessage.style.display = paymentProof ? 'none' : 'block';
+        //     proofModal.classList.add('show');
+        //     document.body.style.overflow = 'hidden';
+        // }
 
         function closeProofModal() {
             proofModal.classList.remove('show');
