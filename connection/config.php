@@ -10,15 +10,16 @@ if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.
     define('DB_USER', 'root');
     define('DB_PASS', '');
 } else {
-    define('DB_HOST', 'labjewels.shop');     
-    define('DB_PORT', '3307');            
+    define('DB_HOST', 'labjewels.shop');
+    define('DB_PORT', '3306');
     define('DB_NAME', 'u801377270_labjewels_db');
     define('DB_USER', 'root');
     define('DB_PASS', 'u801377270_labjewels_db');
 }
 
 // Create database connection
-function getDBConnection() {
+function getDBConnection()
+{
     try {
         $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
         $pdo = new PDO($dsn, DB_USER, DB_PASS);
@@ -32,7 +33,8 @@ function getDBConnection() {
 }
 
 // Utility functions
-function generateSessionToken($length = 64) {
+function generateSessionToken($length = 64)
+{
     try {
         return bin2hex(random_bytes($length / 2));
     } catch (Exception $e) {
@@ -42,7 +44,8 @@ function generateSessionToken($length = 64) {
 }
 
 // Session management
-function createUserSession($userId) {
+function createUserSession($userId)
+{
     $pdo = getDBConnection();
     $token = generateSessionToken();
     $expiresAt = date('Y-m-d H:i:s', strtotime('+30 days')); // Session expires in 30 days
@@ -98,7 +101,8 @@ function createUserSession($userId) {
 //     }
 // }
 
-function validateSession() {
+function validateSession()
+{
     // session_start(); // Ensure session is started
     if (!isset($_SESSION['user_id']) || !isset($_SESSION['session_token'])) {
         return false;
@@ -127,7 +131,8 @@ function validateSession() {
     }
 }
 
-function destroySession() {
+function destroySession()
+{
     $pdo = getDBConnection(); // Use getDBConnection instead of global $pdo
     session_start(); // Ensure session is started
     if (isset($_SESSION['user_id'])) {
@@ -141,4 +146,3 @@ function destroySession() {
     // Clear session data
     $_SESSION = array(); // Clear all session variables
 }
-?>
