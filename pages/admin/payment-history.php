@@ -12,7 +12,7 @@ if (!$currentUser || $currentUser['user_id'] != 1) {
 }
 
 // $ordersXmlFile = __DIR__ . '/../../xml/orders.xml';
-$ordersXmlFile = '../../../xml/orders.xml';
+$ordersXmlFile = '/../../xml/orders.xml';
 
 function loadOrdersXML($file)
 {
