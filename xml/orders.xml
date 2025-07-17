@@ -85,7 +85,8 @@
                 <quantity>1</quantity>
             </item>
         </items>
-    <delivery_completed_on>2025-07-17</delivery_completed_on></order>
+        <delivery_completed_on>2025-07-17</delivery_completed_on>
+    </order>
     <order>
         <order_id>order_6877b7c23d999</order_id>
         <user_id>2</user_id>
@@ -114,5 +115,6 @@
                 <quantity>1</quantity>
             </item>
         </items>
-    <expected_delivery_date>2025-07-20</expected_delivery_date></order>
+        <expected_delivery_date>2025-07-20</expected_delivery_date>
+    </order>
 </orders>
