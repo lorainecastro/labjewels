@@ -16,8 +16,7 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
     $ordersXmlFile = __DIR__ . '/../../xml/orders.xml';
     $lastModified = filemtime($ordersXmlFile);
 
-    function loadOrdersXML($file)
-    {
+    function loadOrdersXML($file) {
         if (!file_exists($file)) {
             $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><orders></orders>');
             $xml->asXML($file);
@@ -192,7 +191,6 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -443,8 +441,7 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
             border-collapse: collapse;
         }
 
-        th,
-        td {
+        th, td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
@@ -501,12 +498,11 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
             .dashboard-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
-
-            th,
-            td {
+            
+            th, td {
                 padding: 10px;
             }
-
+            
             .card-value {
                 font-size: 20px;
             }
@@ -530,7 +526,7 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
             .table-responsive {
                 overflow-x: auto;
             }
-
+            
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
@@ -558,10 +554,9 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
         }
     </style>
 </head>
-
 <body>
     <h1>Dashboard</h1>
-
+    
     <!-- Stats Cards -->
     <div class="dashboard-grid">
         <div class="card" onclick="window.location.href='orders.php'" data-tooltip="Total revenue from shipped and delivered orders">
@@ -573,7 +568,7 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
                 <div class="card-icon bg-purple">₱</div>
             </div>
         </div>
-
+        
         <div class="card" onclick="window.location.href='orders.php'" data-tooltip="Total number of orders placed">
             <div class="card-header">
                 <div>
@@ -582,12 +577,12 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
                 </div>
                 <div class="card-icon bg-pink">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                     </svg>
                 </div>
             </div>
         </div>
-
+        
         <div class="card" onclick="window.location.href='user-management.php'" data-tooltip="Number of unique customers who placed orders">
             <div class="card-header">
                 <div>
@@ -596,14 +591,14 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
                 </div>
                 <div class="card-icon bg-blue">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
-                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
                     </svg>
                 </div>
             </div>
         </div>
-
+        
         <div class="card" data-tooltip="Total quantity of products sold across all orders">
             <div class="card-header">
                 <div>
@@ -612,14 +607,14 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
                 </div>
                 <div class="card-icon bg-green">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
                     </svg>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Charts Section -->
+    
+    <!-- Charts Section -->       
     <div class="charts-row">
         <div class="chart-card">
             <div class="chart-header">
@@ -634,7 +629,7 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
                 <canvas id="sales-chart" style="height: 300px; width: 100%;"></canvas>
             </div>
         </div>
-
+        
         <div class="chart-card">
             <div class="chart-header">
                 <div class="chart-title">Top Products</div>
@@ -648,7 +643,7 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
             </div>
         </div>
     </div>
-
+    
     <!-- Recent Orders Table -->
     <div class="recent-orders">
         <div class="table-header">
@@ -837,7 +832,7 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
                 });
                 // Add active class to clicked button
                 this.classList.add('active');
-
+                
                 // Fetch data and update chart
                 fetch('dashboard.php?data=fetch')
                     .then(response => response.json())
@@ -848,7 +843,7 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
                         }
                         const period = this.getAttribute('data-period');
                         const chartType = this.getAttribute('data-chart');
-
+                        
                         if (chartType === 'sales') {
                             salesChart.data.labels = data.salesData[period].labels;
                             salesChart.data.datasets[0].data = data.salesData[period].values;
@@ -864,5 +859,4 @@ if (isset($_GET['data']) && $_GET['data'] === 'fetch') {
         });
     </script>
 </body>
-
 </html>
