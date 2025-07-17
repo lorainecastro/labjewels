@@ -22,9 +22,9 @@ $csrf_token = $_SESSION['csrf_token'];
 
 // Handle profile update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
-    $username = sanitizeInput($_POST['username']);
-    $firstname = sanitizeInput($_POST['firstname']);
-    $lastname = sanitizeInput($_POST['lastname']);
+    $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
+    $firstname = htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8');
+    $lastname = htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8');
     
     try {
         $pdo = getDBConnection();
@@ -94,9 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_picture'])) {
 
 // Handle password change
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
-    $current_password = $_POST['current_password'];
-    $new_password = sanitizeInput($_POST['new_password']);
-    $confirm_password = $_POST['confirm_password'];
+    $current_password = $_POST['current_password']; // Validate later
+    $new_password = $_POST['new_password']; // Validate later
+    $confirm_password = $_POST['confirm_password']; // Validate later
     
     if ($new_password !== $confirm_password) {
         $error = 'New passwords do not match';
