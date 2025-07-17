@@ -12,7 +12,7 @@ if (!$currentUser) {
     exit;
 }
 
-$profileImageUrl = $currentUser['icon'] ?? 'default-icon.png'; // Fallback to default icon
+$profileImageUrl = $currentUser['icon'] ?? 'no-icon.png'; // Fallback to default icon
 
 ?>
 
@@ -659,7 +659,7 @@ $profileImageUrl = $currentUser['icon'] ?? 'default-icon.png'; // Fallback to de
         </nav>
 
         <div class="profile">
-            <img src="../assets/image/profile/<?php echo htmlspecialchars($profileImageUrl); ?>"
+            <img src="/assets/image/profile/<?php echo htmlspecialchars($profileImageUrl); ?>"
                 alt="Profile picture of <?php echo htmlspecialchars($currentUser['full_name'] ?? 'Admin'); ?>"
                 class="profile-image" id="profilePreview"
                 onerror="this.src='../assets/image/profile/no-icon.png'; console.log('Image failed: <?php echo htmlspecialchars($profileImageUrl); ?>')">
