@@ -10,7 +10,7 @@ if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.
     define('DB_USER', 'root');
     define('DB_PASS', '');
 } else {
-    define('DB_HOST', 'labjewels.shop');
+    define('DB_HOST', '127.0.0.1');
     define('DB_PORT', '3306');
     define('DB_NAME', 'u801377270_labjewels_db');
     define('DB_USER', 'root');
