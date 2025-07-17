@@ -1,0 +1,170 @@
+\documentclass[a4paper,11pt]{article}
+
+% Setting up page geometry
+\usepackage[margin=1in]{geometry}
+
+% Including necessary packages
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+% Defining colors from UI
+\definecolor{primaryColor}{HTML}{1A1A1A}
+\definecolor{primaryGradientStart}{HTML}{8B5CF6}
+\definecolor{secondaryGradientStart}{HTML}{F43F5E}
+\definecolor{secondaryGradientEnd}{HTML}{EC4899}
+\definecolor{grayFont}{HTML}{6B7280}
+\definecolor{borderColor}{HTML}{E5E7EB}
+\definecolor{cardBg}{HTML}{FFFFFF}
+\definecolor{pendingBg}{HTML}{F59E0B}
+\definecolor{shippedBg}{HTML}{3B82F6}
+\definecolor/deliveredBg}{HTML}{10B981}
+\definecolor{cancelledBg}{HTML}{EF4444}
+
+% Configuring fonts
+\usepackage[T1]{fontenc}
+\usepackage{helvetica}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Setting up headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{primaryGradientStart}\textbf{LAB Jewels Sales Report}}
+\fancyhead[R]{\color{grayFont}\small Generated on \today}
+\fancyfoot[C]{\color{grayFont}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{primaryGradientStart}\hrule}
+
+% Customizing section titles
+\titleformat{\section}
+  {\color{primaryColor}\Large\bfseries}
+  {\thesection}
+  {1em}
+  {}
+  [\color{primaryGradientStart}\vspace{-0.5em}\hrule height 2pt]
+\titleformat{\subsection}
+  {\color{primaryColor}\large\bfseries}
+  {\thesubsection}
+  {1em}
+  {}
+
+% Setting up hyperref for metadata
+\hypersetup{
+    pdfauthor={LAB Jewels},
+    pdftitle={Sales Report},
+    pdfcreator={LAB Jewels},
+    colorlinks=true,
+    linkcolor=primaryGradientStart,
+    citecolor=primaryGradientStart,
+    urlcolor=primaryGradientStart
+}
+
+% Custom command for cards
+\newcommand{\reportcard}[3]{
+    \vspace{0.5cm}
+    \noindent
+    \colorbox{cardBg}{
+        \parbox{0.95\textwidth}{
+            \vspace{0.3cm}
+            \hspace{0.5cm}
+            \parbox{0.7\textwidth}{
+                \textbf{\color{grayFont}#1} \\
+                \large\bfseries\color{primaryColor}#2
+            }
+            \hfill
+            \parbox{0.2\textwidth}{\centering\large\color{white}\textbf{#3}}
+            \vspace{0.3cm}
+        }
+    }
+    \vspace{0.5cm}
+}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    \color{primaryGradientStart}
+    \Huge\bfseries LAB Jewels \\
+    \vspace{0.5cm}
+    \Large Sales Report \\
+    \vspace{0.3cm}
+    \normalsize Generated on \today \\
+    \vspace{1cm}
+    \color{primaryColor}
+    \rule{0.3\textwidth}{2pt}
+    \vspace{2cm}
+    \normalsize Prepared by LAB Jewels
+\end{titlepage}
+
+\section{Summary}
+
+% Summary cards
+\reportcard{Total Orders}{<?php echo number_format($totalOrders); ?>}{\colorbox{primaryGradientStart}{\faShoppingCart}}
+\reportcard{Total Sales}{PHP <?php echo number_format($totalSales, 2); ?>}{\colorbox{shippedBg}{\$}}
+\reportcard{Net Sales}{PHP <?php echo number_format($totalSalesExcludingShipping, 2); ?>}{\colorbox{deliveredBg}{\$}}
+\reportcard{Shipping Fees}{PHP <?php echo number_format($totalShippingFees, 2); ?>}{\colorbox{secondaryGradientStart}{\faTruck}}
+\reportcard{Pending Orders}{<?php echo $statusCounts['pending']; ?>}{\colorbox{pendingBg}{\faHourglassHalf}}
+\reportcard{Shipped Orders}{<?php echo $statusCounts['shipped']; ?>}{\colorbox{shippedBg}{\faTruck}}
+\reportcard{Delivered Orders}{<?php echo $statusCounts['delivered']; ?>}{\colorbox{deliveredBg}{\faCheckCircle}}
+\reportcard{Cancelled Orders}{<?php echo $statusCounts['cancelled']; ?>}{\colorbox{cancelledBg}{\faTimesCircle}}
+\reportcard{Most Used Payment Method}{<?php echo htmlspecialchars($mostUsedPaymentMethod); ?>}{\colorbox{secondaryGradientStart}{\faCreditCard}}
+\reportcard{Top Category (Sales)}{<?php echo htmlspecialchars($topCategory); ?>}{\colorbox{primaryGradientStart}{\faStar}}
+\reportcard{Top Category (Stock)}{<?php echo htmlspecialchars($topStockCategory); ?> (<?php echo number_format($topStockValue); ?> units)}{\colorbox{primaryGradientStart}{\faWarehouse}}
+\reportcard{Top Customer}{<?php echo htmlspecialchars($topCustomer['firstname'] . ' ' . $topCustomer['lastname']); ?>}{\colorbox{secondaryGradientEnd}{\faUser}}
+\reportcard{Total Cart Items}{<?php echo number_format($totalCartItems); ?>}{\colorbox{cancelledBg}{\faShoppingBasket}}
+\reportcard{Total Cart Value}{PHP <?php echo number_format($totalCartValue, 2); ?>}{\colorbox{shippedBg}{\$}}
+\reportcard{Most Popular Cart Product}{<?php echo htmlspecialchars($mostPopularCartProductName); ?>}{\colorbox{primaryGradientStart}{\faStar}}
+
+\section{Top Products}
+\begin{longtable}{p{3cm} p{8cm} p{3cm}}
+    \toprule
+    \textbf{Product ID} & \textbf{Name} & \textbf{Units Sold} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endfoot
+    <?php
+    foreach ($topProducts as $productId => $quantity) {
+        foreach ($productsXml->products->product as $product) {
+            if ((int)$product->id === $productId) {
+                echo "#$productId & " . htmlspecialchars($product->name) . " & $quantity \\\\ \n";
+            }
+        }
+    }
+    ?>
+\end{longtable}
+
+\section{Filtered Orders}
+\begin{longtable}{p{2.5cm} p{2cm} p{2.5cm} p{2cm} p{3cm} p{2cm} p{2.5cm}}
+    \toprule
+    \textbf{Order ID} & \textbf{User ID} & \textbf{Date} & \textbf{Payment} & \textbf{Status} & \textbf{Total} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endfoot
+    <?php
+    foreach ($filteredOrders as $order) {
+        $orderTotal = 0;
+        foreach ($order['items'] as $item) {
+            $orderTotal += $item['price'] * $item['quantity'];
+        }
+        $orderTotal += $order['shipping_fee'];
+        echo "#" . htmlspecialchars(substr($order['order_id'], 6)) . " & " .
+             $order['user_id'] . " & " .
+             date('Y-m-d', strtotime($order['timestamp'])) . " & " .
+             htmlspecialchars($order['payment_method']) . " & " .
+             "\\colorbox{" . strtolower($order['status']) . "Bg}{\\color{white}" . ucfirst($order['status']) . "}" . " & " .
+             "PHP " . number_format($orderTotal, 2) . " \\\\ \n";
+    }
+    ?>
+\end{longtable}
+
+\end{document}
