@@ -787,6 +787,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </style>
 </head>
 <body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+            const emailInput = document.querySelector('input[name="email"]');
+            if (emailInput) {
+                emailInput.focus();
+            }
+        });
+  </script>
   <!-- Header -->
   <header>
     <nav>

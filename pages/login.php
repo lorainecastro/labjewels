@@ -881,6 +881,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </style>
 </head>
 <body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+            const usernameInput = document.querySelector('input[name="username"]');
+            if (usernameInput) {
+                usernameInput.focus();
+            }
+        });
+  </script>
   <!-- Header -->
   <header>
     <nav>
