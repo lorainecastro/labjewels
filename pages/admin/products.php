@@ -164,12 +164,44 @@ function deleteProduct($xml, $id, $password)
     }
 }
 
+// function uploadImage($file)
+// {
+//     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '../assets/image/products/';
+
+//     if (!file_exists($uploadDir) || !is_dir($uploadDir)) {
+//         return ['success' => false, 'error' => 'Products directory does not exist'];
+//     }
+
+//     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+//     if (!in_array($file['type'], $allowedTypes)) {
+//         return ['success' => false, 'error' => 'Invalid file type'];
+//     }
+
+//     if ($file['size'] > 5 * 1024 * 1024) {
+//         return ['success' => false, 'error' => 'File size exceeds 5MB'];
+//     }
+
+//     $fileName = uniqid() . '_' . preg_replace('/[^A-Za-z0-9\-\_\.]/', '', basename($file['name']));
+//     $uploadPath = $uploadDir . $fileName;
+
+//     if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+//         return ['success' => true, 'path' => '../assets/image/products/' . $fileName];
+//     }
+
+//     return ['success' => false, 'error' => 'Failed to upload file'];
+// }
+
 function uploadImage($file)
 {
-    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '../assets/image/products/';
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/image/products/';
 
-    if (!file_exists($uploadDir) || !is_dir($uploadDir)) {
-        return ['success' => false, 'error' => 'Products directory does not exist'];
+    // Create directory if it doesn't exist
+    if (!file_exists($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    if (!is_dir($uploadDir)) {
+        return ['success' => false, 'error' => 'Products directory is not a valid directory'];
     }
 
     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -185,7 +217,7 @@ function uploadImage($file)
     $uploadPath = $uploadDir . $fileName;
 
     if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-        return ['success' => true, 'path' => '../assets/image/products/' . $fileName];
+        return ['success' => true, 'path' => '/assets/image/products/' . $fileName];
     }
 
     return ['success' => false, 'error' => 'Failed to upload file'];
