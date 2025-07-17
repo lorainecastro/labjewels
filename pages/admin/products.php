@@ -46,6 +46,51 @@ function saveXML($xml, $file)
     return $dom->save($file);
 }
 
+// function createProduct($xml, $data)
+// {
+//     $products = $xml->products;
+//     $product = $products->addChild('product');
+
+//     // Generate new ID
+//     $lastId = 0;
+//     foreach ($xml->products->product as $p) {
+//         $id = (int)$p->id;
+//         if ($id > $lastId) $lastId = $id;
+//     }
+
+//     $product->addChild('id', $lastId + 1);
+//     $product->addChild('name', htmlspecialchars($data['name']));
+//     $product->addChild('category', htmlspecialchars($data['category']));
+//     $product->addChild('price', (float)$data['price']);
+//     $product->addChild('currency', 'PHP');
+//     $product->addChild('description', htmlspecialchars($data['description']));
+//     $product->addChild('image', htmlspecialchars($data['image']));
+//     $product->addChild('stock', (int)$data['stock']);
+    
+//     // Add sizes
+//     $sizes = $product->addChild('sizes');
+//     if (!empty($data['sizes']) && is_array($data['sizes'])) {
+//         foreach ($data['sizes'] as $size) {
+//             $sizes->addChild('size', htmlspecialchars($size));
+//         }
+//     }
+    
+//     // Add colors
+//     $colors = $product->addChild('colors');
+//     if (!empty($data['colors']) && is_array($data['colors'])) {
+//         foreach ($data['colors'] as $color) {
+//             $colors->addChild('color', htmlspecialchars($color));
+//         }
+//     }
+    
+//     $product->addChild('rating', 0);
+//     $product->addChild('review_count', 0);
+//     $product->addChild('featured', htmlspecialchars($data['featured']));
+//     $product->addChild('on_sale', htmlspecialchars($data['on_sale']));
+
+//     return saveXML($xml, $GLOBALS['xmlFile']);
+// }
+
 function createProduct($xml, $data)
 {
     $products = $xml->products;
@@ -67,7 +112,6 @@ function createProduct($xml, $data)
     $product->addChild('image', htmlspecialchars($data['image']));
     $product->addChild('stock', (int)$data['stock']);
     
-    // Add sizes
     $sizes = $product->addChild('sizes');
     if (!empty($data['sizes']) && is_array($data['sizes'])) {
         foreach ($data['sizes'] as $size) {
@@ -75,7 +119,6 @@ function createProduct($xml, $data)
         }
     }
     
-    // Add colors
     $colors = $product->addChild('colors');
     if (!empty($data['colors']) && is_array($data['colors'])) {
         foreach ($data['colors'] as $color) {
@@ -88,6 +131,7 @@ function createProduct($xml, $data)
     $product->addChild('featured', htmlspecialchars($data['featured']));
     $product->addChild('on_sale', htmlspecialchars($data['on_sale']));
 
+    error_log("New product added with ID: " . ($lastId + 1));
     return saveXML($xml, $GLOBALS['xmlFile']);
 }
 
@@ -191,6 +235,38 @@ function deleteProduct($xml, $id, $password)
 //     return ['success' => false, 'error' => 'Failed to upload file'];
 // }
 
+// function uploadImage($file)
+// {
+//     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/image/products/';
+
+//     // Create directory if it doesn't exist
+//     if (!file_exists($uploadDir)) {
+//         mkdir($uploadDir, 0755, true);
+//     }
+
+//     if (!is_dir($uploadDir)) {
+//         return ['success' => false, 'error' => 'Products directory is not a valid directory'];
+//     }
+
+//     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+//     if (!in_array($file['type'], $allowedTypes)) {
+//         return ['success' => false, 'error' => 'Invalid file type'];
+//     }
+
+//     if ($file['size'] > 5 * 1024 * 1024) {
+//         return ['success' => false, 'error' => 'File size exceeds 5MB'];
+//     }
+
+//     $fileName = uniqid() . '_' . preg_replace('/[^A-Za-z0-9\-\_\.]/', '', basename($file['name']));
+//     $uploadPath = $uploadDir . $fileName;
+
+//     if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+//         return ['success' => true, 'path' => '/assets/image/products/' . $fileName];
+//     }
+
+//     return ['success' => false, 'error' => 'Failed to upload file'];
+// }
+
 function uploadImage($file)
 {
     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/image/products/';
@@ -217,7 +293,7 @@ function uploadImage($file)
     $uploadPath = $uploadDir . $fileName;
 
     if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-        return ['success' => true, 'path' => '/assets/image/products/' . $fileName];
+        return ['success' => true, 'path' => '../assets/image/products/' . $fileName];
     }
 
     return ['success' => false, 'error' => 'Failed to upload file'];
