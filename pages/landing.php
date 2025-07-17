@@ -13,12 +13,12 @@ if ($currentUser) {
 $profileImageUrl = $currentUser['icon'] ?? 'no-icon.png';
 
 // Load XML file
-$xmlFile = __DIR__ . 'public_html/xml/products.xml';
+$xmlFile = '../xml/products.xml';
 
 function loadXML($file)
 {
   if (!file_exists($file)) {
-    $xmlFile = __DIR__ . 'public_html/xml/products.xml';
+    $xmlFile = 'xml/products.xml';
     die('XML file does not exist.' . $xmlFile);
   }
   $xml = simplexml_load_file($file);
