@@ -937,7 +937,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         function openProofModal(paymentProof) {
             const proofImg = document.getElementById('paymentProofImg');
             const noProofMessage = document.getElementById('noProofMessage');
-            proofImg.src = paymentProof ? `../../assets/image/payment_proof/${paymentProof}` : '../../assets/image/payment_proof/no-proof.png';
+            proofImg.src = paymentProof ? `../${paymentProof}` : '../../assets/image/payment_proof/no-proof.png';
             noProofMessage.style.display = paymentProof ? 'none' : 'block';
             proofModal.classList.add('show');
             document.body.style.overflow = 'hidden';
