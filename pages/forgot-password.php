@@ -12,110 +12,111 @@ $notification = ['message' => '', 'type' => ''];
 $email = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['email'] ?? '');
+  $email = trim($_POST['email'] ?? '');
 
-    if (empty($email)) {
-        $notification = ['message' => 'Please enter your email address.', 'type' => 'error'];
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $notification = ['message' => 'Please enter a valid email address.', 'type' => 'error'];
-    } else {
-        try {
-            $pdo = getDBConnection();
+  if (empty($email)) {
+    $notification = ['message' => 'Please enter your email address.', 'type' => 'error'];
+  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $notification = ['message' => 'Please enter a valid email address.', 'type' => 'error'];
+  } else {
+    try {
+      $pdo = getDBConnection();
 
-            // Check if email exists
-            $stmt = $pdo->prepare("
+      // Check if email exists
+      $stmt = $pdo->prepare("
                 SELECT user_id, email, isActive, isVerified, isDeleted 
                 FROM users 
                 WHERE email = ?
             ");
-            $stmt->execute([$email]);
-            $user = $stmt->fetch();
+      $stmt->execute([$email]);
+      $user = $stmt->fetch();
 
-            if (!$user) {
-                $notification = ['message' => 'No account found with that email.', 'type' => 'error'];
-            } elseif ($user['isDeleted'] == 1) {
-                $notification = ['message' => 'No account found with that email.', 'type' => 'error'];
-                error_log("Password reset attempt for deleted account: $email");
-            } elseif ($user['isActive'] == 0 || $user['isVerified'] == 0) {
-                $notification = ['message' => 'Account is not active or verified.', 'type' => 'error'];
-            } else {
-                // Generate OTP
-                $otp = sprintf("%06d", mt_rand(0, 999999));
-                $otp_expires = date('Y-m-d H:i:s', strtotime('+15 minutes'));
+      if (!$user) {
+        $notification = ['message' => 'No account found with that email.', 'type' => 'error'];
+      } elseif ($user['isDeleted'] == 1) {
+        $notification = ['message' => 'No account found with that email.', 'type' => 'error'];
+        error_log("Password reset attempt for deleted account: $email");
+      } elseif ($user['isActive'] == 0 || $user['isVerified'] == 0) {
+        $notification = ['message' => 'Account is not active or verified.', 'type' => 'error'];
+      } else {
+        // Generate OTP
+        $otp = sprintf("%06d", mt_rand(0, 999999));
+        $otp_expires = date('Y-m-d H:i:s', strtotime('+15 minutes'));
 
-                // Store OTP in database
-                $stmt = $pdo->prepare("
+        // Store OTP in database
+        $stmt = $pdo->prepare("
                     UPDATE users 
                     SET otp_code = ?, otp_purpose = 'PASSWORD_RESET', 
                         otp_created_at = NOW(), otp_expires_at = ?, otp_is_used = 0 
                     WHERE email = ?
                 ");
-                $stmt->execute([$otp, $otp_expires, $email]);
+        $stmt->execute([$otp, $otp_expires, $email]);
 
-                // Send OTP email
-                $mail = new PHPMailer(true);
-                try {
-                    // Server settings
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'elci.bank@gmail.com';
-                    $mail->Password = 'misxfqnfsovohfwh';
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port = 587;
+        // Send OTP email
+        $mail = new PHPMailer(true);
+        try {
+          // Server settings
+          $mail->isSMTP();
+          $mail->Host = 'smtp.gmail.com';
+          $mail->SMTPAuth = true;
+          $mail->Username = 'elci.bank@gmail.com';
+          $mail->Password = 'misxfqnfsovohfwh';
+          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+          $mail->Port = 587;
 
-                    // Recipients
-                    $mail->setFrom('castro.loraine.26@gmail.com', 'LAB Jewels');
-                    $mail->addAddress($email);
+          // Recipients
+          $mail->setFrom('castro.loraine.26@gmail.com', 'LAB Jewels');
+          $mail->addAddress($email);
 
-                    // Content
-                    $mail->isHTML(true);
-                    $mail->Subject = 'LAB Jewels Password Reset OTP';
-                    $mail->Body = "
+          // Content
+          $mail->isHTML(true);
+          $mail->Subject = 'LAB Jewels Password Reset OTP';
+          $mail->Body = "
                         <h2>LAB Jewels Password Reset</h2>
                         <p>Your OTP for password reset is: <strong>$otp</strong></p>
                         <p>This code is valid for 15 minutes. Please enter it on the password reset page.</p>
                         <p>If you did not request this, please ignore this email.</p>
                     ";
 
-                    $mail->send();
+          $mail->send();
 
-                    $_SESSION['reset_email'] = $email;
-                    // Return JSON response for AJAX
-                    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-                        ob_clean();
-                        echo json_encode([
-                            'success' => true,
-                            'message' => 'An OTP has been sent to your email.',
-                            'redirect' => 'reset-password.php'
-                        ]);
-                        exit;
-                    } else {
-                        header("Location: reset-password.php");
-                        exit;
-                    }
-                } catch (Exception $e) {
-                    $notification = ['message' => 'Failed to send OTP. Please try again.', 'type' => 'error'];
-                    error_log("Password reset email error: " . $e->getMessage());
-                }
-            }
-        } catch (PDOException $e) {
-            $notification = ['message' => 'An error occurred. Please try again.', 'type' => 'error'];
-            error_log("Password reset error: " . $e->getMessage());
+          $_SESSION['reset_email'] = $email;
+          // Return JSON response for AJAX
+          if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+            ob_clean();
+            echo json_encode([
+              'success' => true,
+              'message' => 'An OTP has been sent to your email.',
+              'redirect' => 'reset-password.php'
+            ]);
+            exit;
+          } else {
+            header("Location: reset-password.php");
+            exit;
+          }
+        } catch (Exception $e) {
+          $notification = ['message' => 'Failed to send OTP. Please try again.', 'type' => 'error'];
+          error_log("Password reset email error: " . $e->getMessage());
         }
+      }
+    } catch (PDOException $e) {
+      $notification = ['message' => 'An error occurred. Please try again.', 'type' => 'error'];
+      error_log("Password reset error: " . $e->getMessage());
     }
-    
-    // Return JSON response for AJAX
-    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-        ob_clean();
-        echo json_encode(['success' => false, 'message' => $notification['message']]);
-        exit;
-    }
+  }
+
+  // Return JSON response for AJAX
+  if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+    ob_clean();
+    echo json_encode(['success' => false, 'message' => $notification['message']]);
+    exit;
+  }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -359,9 +360,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.6; }
-      70% { transform: scale(1.3); opacity: 0; }
-      100% { transform: scale(1.3); opacity: 0; }
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      70% {
+        transform: scale(1.3);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1.3);
+        opacity: 0;
+      }
     }
 
     .forgot-header .brand-icon svg {
@@ -427,7 +439,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       transition: var(--transition);
     }
 
-    .input-field input:focus + .icon {
+    .input-field input:focus+.icon {
       color: var(--primary-color);
     }
 
@@ -494,7 +506,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .back-link {
@@ -537,8 +551,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .footer {
@@ -780,20 +801,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-      20%, 40%, 60%, 80% { transform: translateX(5px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        transform: translateX(-5px);
+      }
+
+      20%,
+      40%,
+      60%,
+      80% {
+        transform: translateX(5px);
+      }
     }
   </style>
 </head>
+
 <body>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-            const emailInput = document.querySelector('input[name="email"]');
-            if (emailInput) {
-                emailInput.focus();
-            }
-        });
+    document.addEventListener("DOMContentLoaded", function() {
+      const emailInput = document.querySelector('input[name="email"]');
+      if (emailInput) {
+        emailInput.focus();
+      }
+    });
   </script>
   <!-- Header -->
   <header>
@@ -820,7 +859,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="forgot-header">
       <div class="brand-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
         </svg>
       </div>
       <h1>Forgot Password</h1>
@@ -856,7 +895,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="brand-section">
         <div class="logo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
           </svg>
           <h1>LAB Jewels</h1>
         </div>
@@ -934,35 +973,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         const formData = new FormData(this);
 
         fetch('', {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          submitBtn.classList.remove('loading');
-          showNotification(data.message, data.success ? 'success' : 'error');
+            method: 'POST',
+            body: formData,
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            submitBtn.classList.remove('loading');
+            showNotification(data.message, data.success ? 'success' : 'error');
 
-          if (data.success) {
-            forgotContainer.style.transform = 'scale(0.95)';
-            forgotContainer.style.opacity = '0.8';
-            setTimeout(() => {
-              window.location.href = data.redirect;
-            }, 1500);
-          } else {
-            forgotContainer.style.animation = 'shake 0.5s ease-in-out';
-            setTimeout(() => {
-              forgotContainer.style.animation = '';
-            }, 500);
-          }
-        })
-        .catch(error => {
-          submitBtn.classList.remove('loading');
-          showNotification('An error occurred. Please try again.', 'error');
-          console.error('Error:', error);
-        });
+            if (data.success) {
+              forgotContainer.style.transform = 'scale(0.95)';
+              forgotContainer.style.opacity = '0.8';
+              setTimeout(() => {
+                window.location.href = data.redirect;
+              }, 1500);
+            } else {
+              forgotContainer.style.animation = 'shake 0.5s ease-in-out';
+              setTimeout(() => {
+                forgotContainer.style.animation = '';
+              }, 500);
+            }
+          })
+          .catch(error => {
+            submitBtn.classList.remove('loading');
+            showNotification('An error occurred. Please try again.', 'error');
+            console.error('Error:', error);
+          });
       });
 
       // Mobile menu toggle
@@ -1024,4 +1063,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     });
   </script>
 </body>
+
 </html>
