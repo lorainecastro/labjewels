@@ -906,7 +906,8 @@ $productsJson = json_encode($products);
                     if (product) {
                         modalProductId.value = productId;
                         modalProductName.textContent = product.name;
-                        modalProductImage.src = product.image;
+                        // modalProductImage.src = product.image;
+                        modalProductImage.src = product.image ? `../${product.image}` : '../../assets/image/products/no-image.png';
                         modalProductImage.alt = product.name;
                         modalProductPrice.textContent = `${product.currency} ${parseFloat(product.price).toFixed(2)}`;
                         stockInfo.textContent = product.stock;
