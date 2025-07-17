@@ -13,7 +13,8 @@ if ($currentUser) {
 $profileImageUrl = $currentUser['icon'] ?? 'no-icon.png';
 
 // Load XML file
-$xmlFile = __DIR__ . '../../xml/products.xml';
+$xmlFile = __DIR__ . '../xml/products.xml';
+
 
 function loadXML($file)
 {
