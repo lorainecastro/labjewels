@@ -12,12 +12,14 @@ if (!$currentUser) {
 
 $profileImageUrl = $currentUser['icon'] ?? 'default-icon.png'; // Fallback to default icon
 
-$xmlFile = __DIR__ . '/../../xml/products.xml';
+// $xmlFile = __DIR__ . '/../../xml/products.xml';
+$xmlFile = '../../xml/products.xml';
 
 function loadXML($file)
 {
     if (!file_exists($file)) {
-        die('XML file does not exist.');
+        $xmlFile = 'xml/products.xml';
+        die('XML file does not exist.' . $xmlFile);
     }
     $xml = simplexml_load_file($file);
     if ($xml === false) {
