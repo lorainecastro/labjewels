@@ -4,17 +4,17 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 // Database configuration
 if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.1') {
-    define('DB_HOST', '127.0.0.1');
+    define('DB_HOST', 'localhost');
     define('DB_PORT', '3307');
     define('DB_NAME', 'jewels');
     define('DB_USER', 'root');
     define('DB_PASS', '');
 } else {
-    define('DB_HOST', '127.0.0.1');
+    define('DB_HOST', 'localhost');
     define('DB_PORT', '3306');
     define('DB_NAME', 'u801377270_labjewels_db');
-    define('DB_USER', 'root');
-    define('DB_PASS', 'u801377270_labjewels_db');
+    define('DB_USER', 'u801377270_labjewels_db');
+    define('DB_PASS', 'Labjewels@2025');
 }
 
 // Create database connection
