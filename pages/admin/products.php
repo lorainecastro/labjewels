@@ -237,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === 0) {
                     $uploadResult = uploadImage($_FILES['image_file']);
                     if ($uploadResult['success']) {
-                        if (!empty($imagePath) && file_exists($_SERVER['DOCUMENT_ROOT'] . '/labjewels/' . $imagePath)) {
+                        if (!empty($imagePath) && file_exists($_SERVER['DOCUMENT_ROOT'] . '../' . $imagePath)) {
                             unlink($_SERVER['DOCUMENT_ROOT'] . '/labjewels/' . $imagePath);
                         }
                         $imagePath = $uploadResult['path'];
