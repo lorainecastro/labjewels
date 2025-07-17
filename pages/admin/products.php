@@ -1341,7 +1341,7 @@ try {
                                         'price' => (float)$p->price,
                                         'description' => (string)$p->description,
                                         // 'image' => (string)$p->image,
-                                        'image' => (string)$p->image ? '../../assets/image/products/' . (string)$p->image : '../../assets/image/products/no-image.png',
+                                        'image' => (string)$p->image ? '../' . (string)$p->image : '../../assets/image/products/no-image.png',
                                         'stock' => (int)$p->stock,
                                         'sizes' => $sizes,
                                         'colors' => $colors,
