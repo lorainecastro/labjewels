@@ -13,8 +13,11 @@ if (!$currentUser) {
 $profileImageUrl = $currentUser['icon'] ?? 'default-icon.png';
 
 // Load XML files
-$xmlFile = __DIR__ . '/../../xml/products.xml';
-$cartXmlFile = __DIR__ . '/../../xml/cart.xml';
+// $xmlFile = __DIR__ . '/../../xml/products.xml';
+// $cartXmlFile = __DIR__ . '/../../xml/cart.xml';
+
+$xmlFile = '../../xml/products.xml';
+$cartXmlFile = '../../xml/cart.xml';
 
 function loadXML($file)
 {
@@ -109,7 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 'id' => (int)$prod->id,
                 'name' => (string)$prod->name,
                 'price' => (float)$prod->price,
-                'image' => (string)$prod->image,
+                // 'image' => (string)$prod->image,
+                'image' => (string)$prod->image ? '../' . (string)$prod->image : '../../assets/image/products/no-image.png',
                 'color' => $color,
                 'size' => $size,
                 'quantity' => $quantity,
@@ -775,7 +779,7 @@ $productsJson = json_encode($products);
                 <?php else: ?>
                     <?php foreach ($paginatedProducts as $product): ?>
                         <div class="product-card hover-scale">
-                            <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                            <img src="../<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                             <div class="description"><?php echo htmlspecialchars($product['description']); ?></div>
                             <div class="price"><?php echo htmlspecialchars($product['currency']); ?> <?php echo number_format($product['price'], 2); ?></div>
