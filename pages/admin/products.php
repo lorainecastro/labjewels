@@ -166,7 +166,7 @@ function deleteProduct($xml, $id, $password)
 
 function uploadImage($file)
 {
-    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/labjewels/assets/image/products/';
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '../assets/image/products/';
 
     if (!file_exists($uploadDir) || !is_dir($uploadDir)) {
         return ['success' => false, 'error' => 'Products directory does not exist'];
@@ -185,7 +185,7 @@ function uploadImage($file)
     $uploadPath = $uploadDir . $fileName;
 
     if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-        return ['success' => true, 'path' => '/labjewels/assets/image/products/' . $fileName];
+        return ['success' => true, 'path' => '../assets/image/products/' . $fileName];
     }
 
     return ['success' => false, 'error' => 'Failed to upload file'];
