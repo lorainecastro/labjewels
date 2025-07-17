@@ -924,10 +924,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         // Orders data from PHP
         const orders = <?php echo json_encode($orders); ?>;
 
+        // function openProofModal(paymentProof) {
+        //     const proofImg = document.getElementById('paymentProofImg');
+        //     const noProofMessage = document.getElementById('noProofMessage');
+        //     proofImg.src = paymentProof || '';
+        //     noProofMessage.style.display = paymentProof ? 'none' : 'block';
+        //     proofModal.classList.add('show');
+        //     document.body.style.overflow = 'hidden';
+        // }
+
         function openProofModal(paymentProof) {
             const proofImg = document.getElementById('paymentProofImg');
             const noProofMessage = document.getElementById('noProofMessage');
-            proofImg.src = paymentProof || '';
+            proofImg.src = paymentProof ? `../../assets/image/payment_proof/${paymentProof}` : '../../assets/image/payment_proof/no-proof.png';
             noProofMessage.style.display = paymentProof ? 'none' : 'block';
             proofModal.classList.add('show');
             document.body.style.overflow = 'hidden';
