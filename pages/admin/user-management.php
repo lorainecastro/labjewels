@@ -10,7 +10,7 @@ if (!$currentUser) {
     exit;
 }
 
-$profileImageUrl = $currentUser['icon'] ?? 'default-icon.png'; // Fallback to default icon
+$profileImageUrl = $currentUser['icon'] ?? 'no-icon.png'; // Fallback to default icon
 
 // Initialize PDO connection
 $pdo = getDBConnection();
