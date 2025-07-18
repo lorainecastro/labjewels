@@ -1514,7 +1514,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
 
         qrCode.onerror = function() {
-            qrCode.src = '../../assets/image/qr/qr-demo.png';
+            qrCode.src = '../../../../assets/image/qr/qr-demo.png';
             qrCode.alt = 'QR Code Unavailable';
             qrCodeLabel.textContent = 'QR code unavailable. Please contact support.';
             fileError.textContent = 'QR code image not found. Please try another payment method.';
