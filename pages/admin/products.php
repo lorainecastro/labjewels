@@ -267,6 +267,38 @@ function deleteProduct($xml, $id, $password)
 //     return ['success' => false, 'error' => 'Failed to upload file'];
 // }
 
+// function uploadImage($file)
+// {
+//     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/image/products/';
+
+//     // Create directory if it doesn't exist
+//     if (!file_exists($uploadDir)) {
+//         mkdir($uploadDir, 0755, true);
+//     }
+
+//     if (!is_dir($uploadDir)) {
+//         return ['success' => false, 'error' => 'Products directory is not a valid directory'];
+//     }
+
+//     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+//     if (!in_array($file['type'], $allowedTypes)) {
+//         return ['success' => false, 'error' => 'Invalid file type'];
+//     }
+
+//     if ($file['size'] > 5 * 1024 * 1024) {
+//         return ['success' => false, 'error' => 'File size exceeds 5MB'];
+//     }
+
+//     $fileName = uniqid() . '_' . preg_replace('/[^A-Za-z0-9\-\_\.]/', '', basename($file['name']));
+//     $uploadPath = $uploadDir . $fileName;
+
+//     if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+//         return ['success' => true, 'path' => '../assets/image/products/' . $fileName];
+//     }
+
+//     return ['success' => false, 'error' => 'Failed to upload file'];
+// }
+
 function uploadImage($file)
 {
     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/image/products/';
@@ -293,7 +325,8 @@ function uploadImage($file)
     $uploadPath = $uploadDir . $fileName;
 
     if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-        return ['success' => true, 'path' => '../assets/image/products/' . $fileName];
+        // Store path relative to document root
+        return ['success' => true, 'path' => '/assets/image/products/' . $fileName];
     }
 
     return ['success' => false, 'error' => 'Failed to upload file'];
@@ -341,22 +374,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
 
             case 'update':
-                $imagePath = $_POST['current_image'] ?? '';
-                if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === 0) {
-                    $uploadResult = uploadImage($_FILES['image_file']);
-                    if ($uploadResult['success']) {
-                        if (!empty($imagePath) && file_exists($_SERVER['DOCUMENT_ROOT'] . '/assets/' . $imagePath)) {
-                            unlink($_SERVER['DOCUMENT_ROOT'] . '/labjewels/' . $imagePath);
-                        }
-                        $imagePath = $uploadResult['path'];
-                    } else {
-                        $_SESSION['error'] = 'Failed to upload image: ' . $uploadResult['error'];
-                        header('Location: ' . $_SERVER['PHP_SELF']);
-                        exit;
-                    }
-                } elseif (!empty($_POST['image'])) {
-                    $imagePath = $_POST['image'];
-                }
+    $imagePath = $_POST['current_image'] ?? '';
+    if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === 0) {
+        $uploadResult = uploadImage($_FILES['image_file']);
+        if ($uploadResult['success']) {
+            if (!empty($imagePath) && file_exists($_SERVER['DOCUMENT_ROOT'] . $imagePath)) {
+                unlink($_SERVER['DOCUMENT_ROOT'] . $imagePath);
+            }
+            $imagePath = $uploadResult['path'];
+        } else {
+            $_SESSION['error'] = 'Failed to upload image: ' . $uploadResult['error'];
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit;
+        }
+    } elseif (!empty($_POST['image'])) {
+        $imagePath = $_POST['image'];
+    }
 
                 $data = [
                     'name' => $_POST['name'],

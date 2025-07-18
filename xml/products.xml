@@ -716,5 +716,25 @@
       <featured>false</featured>
       <on_sale>false</on_sale>
     </product>
+    <product>
+      <id>4036</id>
+      <name>new</name>
+      <category>Necklace</category>
+      <price>12</price>
+      <currency>PHP</currency>
+      <description>new</description>
+      <image>/assets/image/products/6879bff6ce280_profilePhoto11.jpg</image>
+      <stock>12</stock>
+      <sizes>
+        <size>16in</size>
+      </sizes>
+      <colors>
+        <color>Gold</color>
+      </colors>
+      <rating>0</rating>
+      <review_count>0</review_count>
+      <featured>false</featured>
+      <on_sale>false</on_sale>
+    </product>
   </products>
 </store>

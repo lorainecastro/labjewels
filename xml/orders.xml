@@ -64,8 +64,8 @@
             </item>
         </items>
 
-        <delivery_completed_on>2025-07-15</delivery_completed_on>
-    </order>
+        
+    <expected_delivery_date>2025-07-21</expected_delivery_date></order>
     <order>
         <order_id>order_68766ea37f8cb</order_id>
         <user_id>3</user_id>
