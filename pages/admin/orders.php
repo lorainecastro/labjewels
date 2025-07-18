@@ -1623,7 +1623,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 itemElement.className = 'item';
                 itemElement.innerHTML = `
                     <div class="item-info">
-                        <img src="../${item.image}" alt="${item.name}" class="item-image">
+                        <img src="../../../../${item.image}" alt="${item.name}" class="item-image">
                         <div class="item-details">
                             <h4>${item.name}</h4>
                             <div class="item-price">PHP ${Number(item.price).toFixed(2)} × ${item.quantity}</div>
