@@ -814,10 +814,10 @@
                 <div class="bar"></div>
             </div>
                 <ul>
-                    <li class="search-container">
+                    <!-- <li class="search-container">
                         <input type="text" placeholder="Search jewelry...">
                         <i class="fas fa-search"></i>
-                    </li>
+                    </li> -->
                     <li><a href="#" class="menu-item" data-page="home">Home</a></li>
                     <li><a href="#" class="menu-item" data-page="categories">Shop</a></li>
                     <li><a href="#" class="menu-item" data-page="about">About</a></li>
