@@ -207,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 }
 
-                $uploadDir = '../../../../assets/image/payment_proof/';
+                $uploadDir = '/assets/image/payment_proof/';
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0755, true);
                 }
@@ -219,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header("Location: cart.php?error=Failed to upload payment proof");
                     exit;
                 }
-                $paymentProof = '../../../../assets/image/payment_proof/' . $paymentProof;
+                $paymentProof = '/assets/image/payment_proof/' . $paymentProof;
                 error_log("File uploaded successfully: $paymentProof");
             } elseif (in_array($paymentMethod, ['PayPal', 'GCash', 'PayMaya'])) {
                 error_log("Checkout error: No payment proof uploaded for $paymentMethod");
