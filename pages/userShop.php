@@ -844,7 +844,7 @@
 
     <div class="main-content">
         <div class="dashboard-body">
-            <iframe id="dashboard-frame" src="userShop.php" frameborder="0"></iframe>
+            <iframe id="dashboard-frame" src="./user/home.php" frameborder="0"></iframe>
         </div>
     </div>
 

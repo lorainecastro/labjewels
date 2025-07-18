@@ -679,7 +679,7 @@ $profileImageUrl = $currentUser['icon'] ?? 'no-icon.png'; // Fallback to default
 
     <div class="main-content">
         <div class="dashboard-body">
-            <iframe id="dashboard-frame" src="pages/dashboard.php" frameborder="0"></iframe>
+            <iframe id="dashboard-frame" src="./admin/dashboard.php" frameborder="0"></iframe>
         </div>
     </div>
 
