@@ -756,5 +756,25 @@
       <featured>false</featured>
       <on_sale>false</on_sale>
     </product>
+    <product>
+      <id>4038</id>
+      <name>none</name>
+      <category>Necklace</category>
+      <price>12</price>
+      <currency>PHP</currency>
+      <description>none</description>
+      <image>/assets/image/products/6879cae97c228_profilePhoto2.jpg</image>
+      <stock>1000</stock>
+      <sizes>
+        <size>18in</size>
+      </sizes>
+      <colors>
+        <color>Rose Gold</color>
+      </colors>
+      <rating>0</rating>
+      <review_count>0</review_count>
+      <featured>false</featured>
+      <on_sale>false</on_sale>
+    </product>
   </products>
 </store>
