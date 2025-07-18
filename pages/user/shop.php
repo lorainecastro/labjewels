@@ -779,7 +779,7 @@ $productsJson = json_encode($products);
                 <?php else: ?>
                     <?php foreach ($paginatedProducts as $product): ?>
                         <div class="product-card hover-scale">
-                            <img src="../<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                            <img src="../../../../<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                             <div class="description"><?php echo htmlspecialchars($product['description']); ?></div>
                             <div class="price"><?php echo htmlspecialchars($product['currency']); ?> <?php echo number_format($product['price'], 2); ?></div>
@@ -907,7 +907,7 @@ $productsJson = json_encode($products);
                         modalProductId.value = productId;
                         modalProductName.textContent = product.name;
                         // modalProductImage.src = product.image;
-                        modalProductImage.src = product.image ? `../${product.image}` : '../../assets/image/products/no-image.png';
+                        modalProductImage.src = product.image ? `../../../../${product.image}` : '../../../../assets/image/products/no-image.png';
                         modalProductImage.alt = product.name;
                         modalProductPrice.textContent = `${product.currency} ${parseFloat(product.price).toFixed(2)}`;
                         stockInfo.textContent = product.stock;
