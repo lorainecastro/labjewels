@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Validate QR code existence for PayPal, GCash, PayMaya
             if (in_array($paymentMethod, ['PayPal', 'GCash', 'PayMaya'])) {
-                $qrPath = '../../assets/image/qr/' . strtolower($paymentMethod) . '.png';
+                $qrPath = 'assets/image/qr/' . strtolower($paymentMethod) . '.png';
                 if (!file_exists($qrPath)) {
                     error_log("QR code not found for $paymentMethod");
                     header("Location: cart.php?error=QR code for $paymentMethod is unavailable");
@@ -1501,7 +1501,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         placeOrderBtn.style.cursor = 'pointer';
                     } else if (['PayPal', 'GCash', 'PayMaya'].includes(option.value)) {
                         paymentDetails.classList.add('active');
-                        qrCode.src = `../../../../assets/image/qr/${option.value.toLowerCase()}.PNG`;
+                        qrCode.src = `/assets/image/qr/${option.value.toLowerCase()}.png`;
                         qrCode.alt = `${option.value} QR Code for Payment`;
                         qrCodeLabel.textContent = `Scan to pay with ${option.value}`;
                         paymentProofInput.setAttribute('required', 'required');
