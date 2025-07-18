@@ -11,17 +11,21 @@ if (!$currentUser) {
 }
 
 $profileImageUrl = $currentUser['icon'] ?? 'default-icon.png';
-$xmlFile = __DIR__ . '/../../xml/cart.xml';
-$ordersXmlFile = __DIR__ . '/../../xml/orders.xml';
-$productsXmlFile = __DIR__ . '/../../xml/products.xml';
+// $xmlFile = __DIR__ . '/../../xml/cart.xml';
+// $ordersXmlFile = __DIR__ . '/../../xml/orders.xml';
+// $productsXmlFile = __DIR__ . '/../../xml/products.xml';
+
+$xmlFile = '../../xml/cart.xml';
+$ordersXmlFile = '../../xml/orders.xml';
+$productsXmlFile = '../../xml/products.xml';
 
 function loadXML($file)
 {
     if (!file_exists($file)) {
-        if ($file === __DIR__ . '/../../xml/cart.xml') {
+        if ($file === '../../xml/cart.xml') {
             $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><cart></cart>');
             $xml->asXML($file);
-        } elseif ($file === __DIR__ . '/../../xml/orders.xml') {
+        } elseif ($file === '../../xml/orders.xml') {
             $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><orders></orders>');
             $xml->asXML($file);
         } else {
@@ -179,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Validate QR code existence for PayPal, GCash, PayMaya
             if (in_array($paymentMethod, ['PayPal', 'GCash', 'PayMaya'])) {
-                $qrPath = __DIR__ . '/../../assets/image/qr/' . strtolower($paymentMethod) . '.png';
+                $qrPath = '../../../../assets/image/qr/' . strtolower($paymentMethod) . '.png';
                 if (!file_exists($qrPath)) {
                     error_log("QR code not found for $paymentMethod");
                     header("Location: cart.php?error=QR code for $paymentMethod is unavailable");
@@ -203,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 }
 
-                $uploadDir = __DIR__ . '/../../assets/image/payment_proof/';
+                $uploadDir = '/assets/image/payment_proof/';
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0755, true);
                 }
@@ -215,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header("Location: cart.php?error=Failed to upload payment proof");
                     exit;
                 }
-                $paymentProof = '/labjewels/assets/image/payment_proof/' . $paymentProof;
+                $paymentProof = '/assets/image/payment_proof/' . $paymentProof;
                 error_log("File uploaded successfully: $paymentProof");
             } elseif (in_array($paymentMethod, ['PayPal', 'GCash', 'PayMaya'])) {
                 error_log("Checkout error: No payment proof uploaded for $paymentMethod");
