@@ -1497,7 +1497,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         placeOrderBtn.style.cursor = 'pointer';
                     } else if (['PayPal', 'GCash', 'PayMaya'].includes(option.value)) {
                         paymentDetails.classList.add('active');
-                        qrCode.src = `../../assets/image/qr/${option.value.toLowerCase()}.PNG`;
+                        qrCode.src = `../../../../assets/image/qr/${option.value.toLowerCase()}.PNG`;
                         qrCode.alt = `${option.value} QR Code for Payment`;
                         qrCodeLabel.textContent = `Scan to pay with ${option.value}`;
                         paymentProofInput.setAttribute('required', 'required');
