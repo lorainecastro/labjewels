@@ -834,12 +834,12 @@
                     </div>
                 </ul>
             </nav>
-        <div class="secondary-nav">
+        <!-- <div class="secondary-nav">
             <div class="search-container">
                 <input type="text" placeholder="Search jewelry...">
                 <i class="fas fa-search"></i>
             </div>
-        </div>
+        </div> -->
     </header>
 
     <div class="main-content">
