@@ -1590,10 +1590,7 @@ $paginatedProducts = array_slice($filteredProducts, $start, $itemsPerPage);
             <a href="signup.php">Sign Up</a>
           </div>
         </li>
-        <!-- <li class="search-container">
-          <input type="text" placeholder="Search jewelry...">
-          <i class="fas fa-search"></i>
-        </li> -->
+
       </ul>
     </nav>
     <div class="secondary-nav">
