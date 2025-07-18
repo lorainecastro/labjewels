@@ -1574,6 +1574,10 @@ $paginatedProducts = array_slice($filteredProducts, $start, $itemsPerPage);
         <div class="bar"></div>
       </div>
       <ul>
+        <li class="search-container">
+          <input type="text" placeholder="Search jewelry...">
+          <i class="fas fa-search"></i>
+        </li>
         <li><a href="#home">Home</a></li>
         <li><a href="#categories">Shop</a></li>
         <li><a href="#about">About</a></li>
@@ -1586,10 +1590,10 @@ $paginatedProducts = array_slice($filteredProducts, $start, $itemsPerPage);
             <a href="signup.php">Sign Up</a>
           </div>
         </li>
-        <li class="search-container">
+        <!-- <li class="search-container">
           <input type="text" placeholder="Search jewelry...">
           <i class="fas fa-search"></i>
-        </li>
+        </li> -->
       </ul>
     </nav>
     <div class="secondary-nav">
