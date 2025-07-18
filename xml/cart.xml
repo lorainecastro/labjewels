@@ -1,29 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cart>
 
-
-    <item>
-        <id>cart_68772feeb0379</id>
-        <user_id>2</user_id>
-        <product_id>4010</product_id>
-        <product_name>Infinity Symbol Necklace</product_name>
-        <image>/labjewels/assets/image/products/686bfe02d7e30_686bfd220bd32_oscar-ramirez-YScm7xyIGjQ-unsplash.jpg</image>
-        <price>499</price>
-        <color>Silver</color>
-        <size>16in</size>
-        <quantity>2</quantity>
-        <timestamp>2025-07-16 06:51:58</timestamp>
-    </item>
-    <item>
-        <id>cart_68786dbc0bae5</id>
-        <user_id>2</user_id>
-        <product_id>4002</product_id>
-        <product_name>Stackable Birthstone Rings</product_name>
-        <image>/labjewels/assets/image/products/686be0e839bd6_sabrianna-mmCm6c2ru5A-unsplash.jpg</image>
-        <price>349</price>
-        <color>Silver</color>
-        <size>7</size>
-        <quantity>5</quantity>
-        <timestamp>2025-07-17 05:27:56</timestamp>
-    </item>
 </cart>
