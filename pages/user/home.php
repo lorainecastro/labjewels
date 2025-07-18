@@ -10,7 +10,7 @@ if (!$currentUser) {
     exit;
 }
 
-$profileImageUrl = $currentUser['icon'] ?? 'default-icon.png';
+$profileImageUrl = $currentUser['icon'] ?? 'no-icon.png';
 
 // Load XML files
 // $xmlFile = __DIR__ . '/../../xml/products.xml';

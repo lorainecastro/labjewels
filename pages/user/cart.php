@@ -10,7 +10,7 @@ if (!$currentUser) {
     exit;
 }
 
-$profileImageUrl = $currentUser['icon'] ?? 'default-icon.png';
+$profileImageUrl = $currentUser['icon'] ?? 'no-icon.png';
 $xmlFile = '../../xml/cart.xml';
 $ordersXmlFile = '../../xml/orders.xml';
 $productsXmlFile = '../../xml/products.xml';
