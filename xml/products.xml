@@ -40,7 +40,7 @@
       <currency>PHP</currency>
       <description>Timeless pearl pendant necklace, perfect for elegant occasions</description>
       <image>/assets/image/products/686bfd368ee31_oscar-ramirez-ARqkqB78iPU-unsplash.jpg</image>
-      <stock>95</stock>
+      <stock>100</stock>
       <rating>0</rating>
       <review_count>0</review_count>
       <featured>true</featured>
@@ -87,7 +87,7 @@
       <currency>PHP</currency>
       <description>Minimalist infinity symbol necklace, symbolizing eternal love</description>
       <image>/assets/image/products/686bfe02d7e30_686bfd220bd32_oscar-ramirez-YScm7xyIGjQ-unsplash.jpg</image>
-      <stock>97</stock>
+      <stock>100</stock>
       <sizes>
         <size>16in</size>
         <size>18in</size>
@@ -713,6 +713,26 @@
         <color>Gold</color>
         <color>Rose Gold</color>
       </colors>
+      <featured>false</featured>
+      <on_sale>false</on_sale>
+    </product>
+    <product>
+      <id>4036</id>
+      <name>new</name>
+      <category>Necklace</category>
+      <price>999</price>
+      <currency>PHP</currency>
+      <description>none</description>
+      <image>/assets/image/products/6879ed7ea3a99_new.png</image>
+      <stock>100</stock>
+      <sizes>
+        <size>20in</size>
+      </sizes>
+      <colors>
+        <color>Black</color>
+      </colors>
+      <rating>0</rating>
+      <review_count>0</review_count>
       <featured>false</featured>
       <on_sale>false</on_sale>
     </product>
