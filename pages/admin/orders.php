@@ -1626,10 +1626,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                         <img src="../../../../${item.image}" alt="${item.name}" class="item-image">
                         <div class="item-details">
                             <h4>${item.name}</h4>
-                            <div class="item-price">PHP ${Number(item.price).toFixed(2)} × ${item.quantity}</div>
+                            <div class="item-price">₱ ${Number(item.price).toFixed(2)} × ${item.quantity}</div>
                         </div>
                     </div>
-                    <div class="item-total">PHP ${Number(item.total).toFixed(2)}</div>
+                    <div class="item-total">₱ ${Number(item.total).toFixed(2)}</div>
                 `;
                 itemsContainer.appendChild(itemElement);
             });
