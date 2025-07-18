@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Validate QR code existence for PayPal, GCash, PayMaya
             if (in_array($paymentMethod, ['PayPal', 'GCash', 'PayMaya'])) {
-                $qrPath = 'assets/image/qr/' . strtolower($paymentMethod) . '.png';
+                $qrPath = '../../../../assets/image/qr/' . strtolower($paymentMethod) . '.png';
                 if (!file_exists($qrPath)) {
                     error_log("QR code not found for $paymentMethod");
                     header("Location: cart.php?error=QR code for $paymentMethod is unavailable");
