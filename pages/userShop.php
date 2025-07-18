@@ -1,3 +1,17 @@
+<?php
+require '../connection/config.php';
+session_start();
+
+// Check if user is already logged in
+$currentUser = validateSession();
+
+if (!$currentUser) {
+    header("Location: ../pages/login.php");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
