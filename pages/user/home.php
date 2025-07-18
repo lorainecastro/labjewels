@@ -596,7 +596,7 @@ $currentPage = $paginationData['currentPage'];
                     <div class="products-grid">
                         <?php foreach ($featuredProducts as $product): ?>
                             <div class="product-card hover-scale">
-                                <img src="../<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                                <img src="../../../../<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                                 <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                                 <div class="description"><?php echo htmlspecialchars($product['description']); ?></div>
                                 <div class="price"><?php echo htmlspecialchars($product['currency']); ?> <?php echo number_format($product['price'], 2); ?></div>
